@@ -43,6 +43,11 @@ for (const file of SCRIPTS) {
     assert.deepEqual(metadata.grant, ["GM.addStyle"]);
   });
 
+  test(`${file} compiles the way Userscripts injects it`, () => {
+    const source = fs.readFileSync(path.join(PUBLIC_DIR, file), "utf8");
+    assert.doesNotThrow(() => new Function("{GM,GM_info}", source));
+  });
+
   test(`${name}.meta.js serves the same file, so its header always matches`, () => {
     const rewrite = VERCEL.rewrites.find(({ source }) => source === `/${name}.meta.js`);
     assert.deepEqual(rewrite, { source: `/${name}.meta.js`, destination: `/${file}` });

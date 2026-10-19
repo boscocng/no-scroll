@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         nofeed Instagram
 // @description  Instagram without Reels: the Reels tab and Explore sit behind a gate, and reels leave the home feed.
-// @version      1.0.0
+// @version      1.0.1
 // @match        https://www.instagram.com/*
 // @inject-into  content
 // @run-at       document-start
@@ -10,8 +10,6 @@
 // @updateURL    https://nofeed-bosco.vercel.app/instagram-no-reels.meta.js
 // @downloadURL  https://nofeed-bosco.vercel.app/instagram-no-reels.user.js
 // ==/UserScript==
-
-"use strict";
 
 const INSTAGRAM = "https://www.instagram.com";
 

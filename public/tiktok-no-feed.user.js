@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         nofeed TikTok
 // @description  TikTok for messages and search only: the feeds sit behind a gate.
-// @version      1.0.0
+// @version      1.0.1
 // @match        https://www.tiktok.com/*
 // @inject-into  content
 // @run-at       document-start
@@ -10,8 +10,6 @@
 // @updateURL    https://nofeed-bosco.vercel.app/tiktok-no-feed.meta.js
 // @downloadURL  https://nofeed-bosco.vercel.app/tiktok-no-feed.user.js
 // ==/UserScript==
-
-"use strict";
 
 const TIKTOK = "https://www.tiktok.com";
 
