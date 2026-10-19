@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TikTok launcher</title>
+<meta name="apple-mobile-web-app-title" content="TikTok">
+<link rel="apple-touch-icon" href="/icon-tiktok.png">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main>
+<p class="banner" id="standalone" hidden>This icon was added with Open as Web App on, so the filter can't run here. Delete the icon, open this page in Safari, and add it again with Open as Web App off.</p>
+<h1>What are you here for?</h1>
+<div class="stack">
+<form class="search" action="https://www.tiktok.com/search" method="get" role="search">
+<input type="search" name="q" placeholder="Search TikTok" aria-label="Search TikTok" enterkeyhint="search" autocomplete="off" required>
+<button class="button" type="submit">Search</button>
+</form>
+<a class="button secondary" href="https://www.tiktok.com/messages">Messages</a>
+</div>
+</main>
+<script>
+if (navigator.standalone || matchMedia("(display-mode: standalone)").matches) {
+  document.getElementById("standalone").hidden = false;
+}
+</script>
+</body>
+</html>
