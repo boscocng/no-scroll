@@ -1,0 +1,21 @@
+{
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
+    },
+    {
+      "source": "/(.*)\\.js",
+      "headers": [
+        { "key": "Content-Disposition", "value": "inline" },
+        { "key": "Cache-Control", "value": "no-cache" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/tiktok-no-feed.meta.js", "destination": "/tiktok-no-feed.user.js" },
+    { "source": "/instagram-no-reels.meta.js", "destination": "/instagram-no-reels.user.js" }
+  ]
+}
