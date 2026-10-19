@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         nofeed TikTok
-// @description  TikTok for messages and search only: the feeds send you to search.
-// @version      1.0.2
+// @description  TikTok for messages and search only: the feeds send you to Messages, or to search in the phone layout.
+// @version      1.0.3
 // @match        https://www.tiktok.com/*
 // @inject-into  content
 // @run-at       document-start
@@ -12,7 +12,6 @@
 // ==/UserScript==
 
 const TIKTOK = "https://www.tiktok.com";
-const SEARCH_URL = `${TIKTOK}/search`;
 
 const FEED_ROUTES = [
   ["for-you", /^\/(foryou)?$/i],
@@ -28,10 +27,22 @@ function routePath(url) {
   return new URL(url, TIKTOK).pathname.replace(/\/+$/, "") || "/";
 }
 
-function classify(url) {
+function isDesktopLayout(userAgent) {
+  return /Macintosh/.test(userAgent);
+}
+
+function landingUrl(userAgent) {
+  return isDesktopLayout(userAgent) ? `${TIKTOK}/messages` : `${TIKTOK}/search`;
+}
+
+function classify(url, userAgent = globalThis.navigator?.userAgent ?? "") {
   const path = routePath(url);
   const feed = FEED_ROUTES.find(([, pattern]) => pattern.test(path));
-  return feed ? { rule: "redirect", name: feed[0] } : { rule: "allow", name: "default" };
+  if (feed) return { rule: "redirect", name: feed[0] };
+  if (isDesktopLayout(userAgent) && path === "/search" && !new URL(url, TIKTOK).searchParams.get("q")) {
+    return { rule: "redirect", name: "empty-search" };
+  }
+  return { rule: "allow", name: "default" };
 }
 
 function videoId(url) {
@@ -47,7 +58,7 @@ function isSwipe(fromUrl, toUrl, navigationType) {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { classify, videoId, isSwipe, SEARCH_URL };
+  module.exports = { classify, landingUrl, videoId, isSwipe };
 }
 
 function main() {
@@ -78,7 +89,7 @@ a[href="/discover"], a[href^="/discover?"], a[href="/live"], a[href^="/live?"] {
   function render(fromUrl, toUrl, navigationType) {
     const route = classify(toUrl);
     if (route.rule === "redirect") {
-      leaveFor(SEARCH_URL);
+      leaveFor(landingUrl(navigator.userAgent));
     } else if (isSwipe(fromUrl, toUrl, navigationType)) {
       leaveFor(fromUrl);
     } else {

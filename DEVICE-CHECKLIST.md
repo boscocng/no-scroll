@@ -16,14 +16,15 @@ If a step doesn't match, turn on debug mode: add `#nofeed-debug` to the end of t
 
 ## 2. TikTok
 
-1. On the install page, tap **TikTok launcher**. The page says "Add this to your Home Screen". Tap Share > **Add to Home Screen**, turn **Open as Web App** off, then tap Add. A slate icon with a "T" appears.
-2. Tap the icon. Safari opens TikTok's search page.
-3. Search for something. TikTok's search results open. If it tries to open the TikTok app instead, tell me.
-4. Tap **Inbox** at the bottom. Your messages open. If you get an "open the app" screen instead, tell me before switching to Request Desktop Website: desktop TikTok has no search page, so the icon would need a different starting point.
-5. Open https://www.tiktok.com/ directly. You land on the search page instead of the feed. The same happens on /following, /friends, /explore and /live.
-6. Look around TikTok's menus: Home, Discover, For You, Following, Friends and LIVE are gone. Inbox, the + button and your profile are still there.
-7. Search for something, open a video, then move to the next one with the arrow or a swipe. You're put back on the video you were watching.
-8. Open a video someone sent you in your inbox. It plays.
+1. Open tiktok.com, tap the button at the left of the address bar, then **Request Desktop Website**. TikTok now looks like its computer version, which is the only one with messages. Safari remembers this for TikTok.
+2. On the install page, tap **TikTok launcher**. The page says "Add this to your Home Screen". Tap Share > **Add to Home Screen**, turn **Open as Web App** off, then tap Add. A slate icon with a "T" appears.
+3. Tap the icon. Safari opens your TikTok messages, and you can open a chat and send a message.
+4. Tap **Search** at the top of the left sidebar, type something and press Go. TikTok's search results open.
+5. Tap **Activity** in the left sidebar. Your notifications show.
+6. Open https://www.tiktok.com/ directly. You land on your messages instead of the feed. The same happens on /following, /friends, /explore and /live.
+7. Look at the left sidebar: For You, Explore, Following, Friends and LIVE are gone. Search, Messages, Activity, Upload and your profile are still there.
+8. Open a video from your search results, then move to the next one with the arrow. You're put back on the video you were watching.
+9. Open a video someone sent you in Messages. It plays.
 
 ## 3. Instagram
 

@@ -1,6 +1,9 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { classify, videoId, isSwipe, SEARCH_URL } = require("../public/tiktok-no-feed.user.js");
+const { classify, landingUrl, videoId, isSwipe } = require("../public/tiktok-no-feed.user.js");
+
+const PHONE = "Mozilla/5.0 (iPhone; CPU iPhone OS 26_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Mobile/15E148 Safari/604.1";
+const DESKTOP_MODE = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15";
 
 const FEEDS = {
   "/": "for-you",
@@ -51,9 +54,29 @@ test("sends the feed routes to search, ignoring trailing slashes and query strin
   }
 });
 
-test("never redirects the search page itself, so the redirect cannot loop", () => {
-  assert.equal(SEARCH_URL, "https://www.tiktok.com/search");
-  assert.deepEqual(classify(SEARCH_URL), { rule: "allow", name: "default" });
+test("lands on Messages in desktop mode and on search in the phone layout", () => {
+  assert.equal(landingUrl(DESKTOP_MODE), "https://www.tiktok.com/messages");
+  assert.equal(landingUrl(PHONE), "https://www.tiktok.com/search");
+});
+
+test("never redirects a landing page, so the redirect cannot loop", () => {
+  for (const userAgent of [PHONE, DESKTOP_MODE]) {
+    assert.deepEqual(classify(landingUrl(userAgent), userAgent), { rule: "allow", name: "default" }, userAgent);
+  }
+});
+
+test("desktop mode sends the empty search page to Messages, but keeps real searches", () => {
+  assert.deepEqual(classify("/search", DESKTOP_MODE), { rule: "redirect", name: "empty-search" });
+  assert.deepEqual(classify("/search?q=", DESKTOP_MODE), { rule: "redirect", name: "empty-search" });
+  assert.deepEqual(classify("/search?q=cats&t=1792391135969", DESKTOP_MODE), { rule: "allow", name: "default" });
+  assert.deepEqual(classify("/search/user?q=cats", DESKTOP_MODE), { rule: "allow", name: "default" });
+  assert.deepEqual(classify("/search", PHONE), { rule: "allow", name: "default" });
+});
+
+test("feed routes redirect in both layouts", () => {
+  for (const userAgent of [PHONE, DESKTOP_MODE]) {
+    assert.equal(classify("/foryou", userAgent).rule, "redirect", userAgent);
+  }
 });
 
 test("allows messages, search, profiles, posts and everything else", () => {
