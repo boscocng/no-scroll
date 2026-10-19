@@ -1,8 +1,8 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { classify, videoId, isSwipe } = require("../public/tiktok-no-feed.user.js");
+const { classify, videoId, isSwipe, SEARCH_URL } = require("../public/tiktok-no-feed.user.js");
 
-const GATED = {
+const FEEDS = {
   "/": "for-you",
   "/?lang=en": "for-you",
   "https://www.tiktok.com/": "for-you",
@@ -45,10 +45,15 @@ const ALLOWED = [
   "/tiktokstudio/upload?from=webapp&tab=video",
 ];
 
-test("gates the feed routes, ignoring trailing slashes and query strings", () => {
-  for (const [url, name] of Object.entries(GATED)) {
-    assert.deepEqual(classify(url), { rule: "gate", name }, url);
+test("sends the feed routes to search, ignoring trailing slashes and query strings", () => {
+  for (const [url, name] of Object.entries(FEEDS)) {
+    assert.deepEqual(classify(url), { rule: "redirect", name }, url);
   }
+});
+
+test("never redirects the search page itself, so the redirect cannot loop", () => {
+  assert.equal(SEARCH_URL, "https://www.tiktok.com/search");
+  assert.deepEqual(classify(SEARCH_URL), { rule: "allow", name: "default" });
 });
 
 test("allows messages, search, profiles, posts and everything else", () => {

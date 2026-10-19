@@ -16,14 +16,14 @@ If a step doesn't match, turn on debug mode: add `#nofeed-debug` to the end of t
 
 ## 2. TikTok
 
-1. On the install page, tap **TikTok launcher**, then Share > **Add to Home Screen**. Turn **Open as Web App** off, then tap Add. A slate icon with a "T" appears.
-2. Tap the icon. Safari opens a dark page asking "What are you here for?"
-3. Search for something. TikTok's search results open.
-4. Go back to the launcher and tap **Messages**. Your inbox opens. If you get TikTok's feed or an "open the app" screen instead, open tiktok.com, tap **AA** > **Request Desktop Website**, and try again.
-5. Open https://www.tiktok.com/ directly. You see the "What are you here for?" screen instead of the feed, and nothing plays. The same happens on /following, /friends, /explore and /live.
-6. Look around TikTok's menus: For You, Explore, Following, Friends and LIVE are gone. Messages, Upload and your profile are still there.
-7. Search for something, open a video, then move to the next one with the arrow or a swipe. The screen asks "What are you here for?" with a **Back** button. Back returns you to where you were.
-8. Open a video someone sent you in Messages. It plays.
+1. On the install page, tap **TikTok launcher**. The page says "Add this to your Home Screen". Tap Share > **Add to Home Screen**, turn **Open as Web App** off, then tap Add. A slate icon with a "T" appears.
+2. Tap the icon. Safari opens TikTok's search page.
+3. Search for something. TikTok's search results open. If it tries to open the TikTok app instead, tell me.
+4. Tap **Inbox** at the bottom. Your messages open. If you get an "open the app" screen instead, tell me before switching to Request Desktop Website: desktop TikTok has no search page, so the icon would need a different starting point.
+5. Open https://www.tiktok.com/ directly. You land on the search page instead of the feed. The same happens on /following, /friends, /explore and /live.
+6. Look around TikTok's menus: Home, Discover, For You, Following, Friends and LIVE are gone. Inbox, the + button and your profile are still there.
+7. Search for something, open a video, then move to the next one with the arrow or a swipe. You're put back on the video you were watching.
+8. Open a video someone sent you in your inbox. It plays.
 
 ## 3. Instagram
 
